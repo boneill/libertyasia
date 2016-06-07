@@ -1,0 +1,171 @@
+{{diagnostic}}
+<div class="container">
+  <h1>Media Monitoring Form</h1>
+  <div  [hidden]="submitted">
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #mediaForm="ngForm">
+      <div class="form-group">
+        <label for="ngoCode">Code</label>
+        <input type="text" class="form-control" required
+            [(ngModel)]="model.ngoCode"
+            ngControl="ngoCode"
+               #ngoCode="ngForm"/>
+        <div [hidden]="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="originatorName">Originator Name</label>
+        <input type="text" class="form-control" required
+             [(ngModel)]="model.originatorName"
+             ngControl="originatorName" #originatorName="ngForm"/>
+        <div [hidden]="originatorName.valid || originatorName.pristine" class="alert alert-danger">Originator Name is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="countryOfOffence">Country of Offence</label>
+        <input type="text" class="form-control" required
+               [(ngModel)]="model.countryOfOffence"
+               ngControl="countryOfOffence" #country="ngForm" />
+        <div [hidden]="country.valid || country.pristine" class="alert alert-danger">Country of Offence is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="sourceUrl">Source URL</label>
+        <input type="text" class="form-control" required
+               [(ngModel)]="model.sourceUrl"
+               ngControl="sourceUrl" #sourceUrl="ngForm" />
+        <div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>
+      </div>
+
+ <!--     <div class="form-group">
+        <label for="entityType">Entity Type</label>
+        <input type="text" class="form-control" required
+               [(ngModel)]="model.entityType"
+               ngControl="entityType" #entityType="ngForm" />
+        <div [hidden]="entityType.valid || entityType.pristine" class="alert alert-danger">Entity Type is required</div>
+      </div> -->
+
+      <div class="form-group">
+        <div class="input-controls">
+
+          <label for="entityType">Entity Type</label>
+          <div>
+            <label>
+              <input #person name="entityType" type="radio" value="Person"  (click)="model.entityType = person.value;" />
+              Person
+            </label>
+          </div>
+          <div>
+            <label>
+              <input #entity name="entityType" type="radio"  value="Entity" (click)="model.entityType = entity.value;"  />
+              Organisation
+            </label>
+          </div>
+
+          <div hidden>
+            <input type="text" class="form-control" required
+                   [(ngModel)]="model.entityType"
+                   ngControl="entityType" #entityType="ngForm" />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Person Entity Types -->
+      <div *ngIf="model.entityType == 'Person'">
+
+        <div class="form-group">
+          <label for="nationality">Nationality (Individual)</label>
+          <input type="text" class="form-control" required
+                 [(ngModel)]="model.nationality"
+                 ngControl="nationality" #nationality="ngForm" />
+          <div [hidden]="nationality.valid || nationality.pristine" class="alert alert-danger">Nationality is required</div>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="model.age"
+                 ngControl="age" #age="ngForm" />
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" class="form-control"
+                 [(ngModel)]="model.dob"
+                 ngControl="dob" #dob="ngForm" />
+        </div>
+
+        <div class="form-group">
+          <div class="input-controls">
+
+            <label for="gender">Gender</label>
+            <div>
+              <label>
+                <input #male name="gender" type="radio" value="Male"  (click)="model.gender = male.value;" />
+                Male
+              </label>
+            </div>
+            <div>
+              <label>
+                <input #female name="gender" type="radio"  value="Female" (click)="model.gender = female.value;"  />
+                Female
+              </label>
+            </div>
+
+            <div hidden>
+              <input type="text" class="form-control" required
+                     [(ngModel)]="model.gender"
+                     ngControl="gender" #gender="ngForm" />
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Organisation Inputs -->
+      <div *ngIf="model.entityType == 'Entity'">
+
+        <div class="form-group">
+          <label for="placeOfIncorporation">Place of Incorporation</label>
+          <input type="text" class="form-control" required
+                 [(ngModel)]="model.placeOfIncorporation"
+                 ngControl="placeOfIncorporation" #placeOfIncorporation="ngForm" />
+          <div [hidden]="placeOfIncorporation.valid || placeOfIncorporation.pristine" class="alert alert-danger">Place of Incorporation is required for an Entity</div>
+        </div>
+
+       <!-- <div class="form-group">
+          <label for="organisationType">Organisation Type</label>
+          <input type="text" class="form-control" required
+                 [(ngModel)]="model.organisationType"
+                 ngControl="organisationType" #organisationType="ngForm" />
+          <div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>
+        </div> -->
+
+        <div class="form-group">
+          <label for="organisationType">Organisation Type</label>
+          <select class="form-control" [(ngModel)]="model.organisationType" ngControl="organisationType" #organisationType="ngForm" required>
+            <option></option>
+            <option>Corporation</option>
+            <option>Company</option>
+            <option>Club</option>
+            <option>4</option>
+          </select>
+          <div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>
+        </div>
+
+
+
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newMediaSubmission()">Reset Form</button>
+    </form>
+  </div>
+  <div [hidden]="!submitted">
+    <h2>Your information has been submitted. </h2>
+    <br>
+    <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">New Media Submission</button>
+  </div>
+</div>
