@@ -24,6 +24,6 @@ export class MediaFormComponent {
     this.model = new MediaData();
     this.active = false;
     setTimeout(()=> this.active=true, 0);
-    submitted=false;
+    this.submitted=false;
   }
 }
