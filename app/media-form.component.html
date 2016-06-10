@@ -9,7 +9,8 @@
             [(ngModel)]="model.ngoCode"
             ngControl="ngoCode"
                #ngoCode="ngForm"/>
-        <div [hidden]="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>
+        <div *ngIf ="ngoCode.dirty && !ngoCode.valid" class="alert alert-danger">Code is required</div>
+        <!--<div [hidden] ="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>-->
       </div>
 
       <div class="form-group">
@@ -17,15 +18,39 @@
         <input type="text" class="form-control" required
              [(ngModel)]="model.originatorName"
              ngControl="originatorName" #originatorName="ngForm"/>
-        <div [hidden]="originatorName.valid || originatorName.pristine" class="alert alert-danger">Originator Name is required</div>
+        <div *ngIf ="originatorName.dirty && !originatorName.valid" class="alert alert-danger">Originator Name is required</div>
+        <!--<div [hidden]="originatorName.valid || originatorName.pristine" class="alert alert-danger">Originator Name is required</div>-->
       </div>
 
       <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" required
+             [(ngModel)]="model.email"
+             ngControl="email" #email="ngForm" />
+        <div *ngIf ="email.dirty && !email.valid" class="alert alert-danger">Email is required</div>
+        <!--<div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>-->
+      </div>
+      <!--<div class="form-group">
         <label for="countryOfOffence">Country of Offence</label>
         <input type="text" class="form-control" required
                [(ngModel)]="model.countryOfOffence"
                ngControl="countryOfOffence" #country="ngForm" />
-        <div [hidden]="country.valid || country.pristine" class="alert alert-danger">Country of Offence is required</div>
+        <div *ngIf ="country.dirty && !country.valid" class="alert alert-danger">Country of Offence is required</div>
+      </div>-->
+      <div class="form-group">
+        <label for="countryOfOffence">Country of Offence</label>
+        <select class="form-control" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #organisationType="ngForm" required>
+          <option *ngFor="let country of countries">{{country.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="subjectName">Subject Name</label>
+        <input type="text" class="form-control" required
+               [(ngModel)]="model.subjectName"
+               ngControl="subjectName" #subjectName="ngForm" />
+        <div *ngIf ="subjectName.dirty && !subjectName.valid" class="alert alert-danger">Subject Name is required</div>
+        <!--<div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>-->
       </div>
 
       <div class="form-group">
@@ -33,7 +58,8 @@
         <input type="text" class="form-control" required
                [(ngModel)]="model.sourceUrl"
                ngControl="sourceUrl" #sourceUrl="ngForm" />
-        <div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>
+        <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger">Source URL is required</div>
+        <!--<div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>-->
       </div>
 
  <!--     <div class="form-group">
@@ -78,7 +104,8 @@
           <input type="text" class="form-control" required
                  [(ngModel)]="model.nationality"
                  ngControl="nationality" #nationality="ngForm" />
-          <div [hidden]="nationality.valid || nationality.pristine" class="alert alert-danger">Nationality is required</div>
+          <div *ngIf ="nationality.dirty && !nationality.valid" class="alert alert-danger">Nationality is required</div>
+          <!--<div [hidden]="nationality.valid || nationality.pristine" class="alert alert-danger">Nationality is required</div>-->
         </div>
 
         <div class="form-group">
@@ -88,12 +115,12 @@
                  ngControl="age" #age="ngForm" />
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label for="dob">Date of Birth</label>
           <input type="date" class="form-control"
                  [(ngModel)]="model.dob"
                  ngControl="dob" #dob="ngForm" />
-        </div>
+        </div>-->
 
         <div class="form-group">
           <div class="input-controls">
@@ -132,18 +159,20 @@
           <input type="text" class="form-control" required
                  [(ngModel)]="model.placeOfIncorporation"
                  ngControl="placeOfIncorporation" #placeOfIncorporation="ngForm" />
-          <div [hidden]="placeOfIncorporation.valid || placeOfIncorporation.pristine" class="alert alert-danger">Place of Incorporation is required for an Entity</div>
+          <div *ngIf ="placeOfIncorporation.dirty && !placeOfIncorporation.valid" class="alert alert-danger">Place of Incorporation is required for an Entity</div>
+          <!--<div [hidden]="placeOfIncorporation.valid || placeOfIncorporation.pristine" class="alert alert-danger">Place of Incorporation is required for an Entity</div>-->
         </div>
 
-       <!-- <div class="form-group">
+       <div class="form-group">
           <label for="organisationType">Organisation Type</label>
           <input type="text" class="form-control" required
                  [(ngModel)]="model.organisationType"
                  ngControl="organisationType" #organisationType="ngForm" />
-          <div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>
-        </div> -->
-
-        <div class="form-group">
+          <div *ngIf ="organisationType.dirty && !organisationType.valid" class="alert alert-danger">Organisation Type is required for an Entity</div>
+          <!--<div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>-->
+        </div>
+        <!-- Drop Down Version -->
+        <!--<div class="form-group">
           <label for="organisationType">Organisation Type</label>
           <select class="form-control" [(ngModel)]="model.organisationType" ngControl="organisationType" #organisationType="ngForm" required>
             <option></option>
@@ -153,7 +182,7 @@
             <option>4</option>
           </select>
           <div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>
-        </div>
+        </div>-->
 
 
 
@@ -163,7 +192,8 @@
       <button type="button" class="btn btn-default" (click)="newMediaSubmission()">Reset Form</button>
     </form>
   </div>
-  <div [hidden]="!submitted">
+  <!--<div [hidden]="!submitted">-->
+  <div *ngIf="submitted">
     <h2>Your information has been submitted. </h2>
     <br>
     <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">New Media Submission</button>

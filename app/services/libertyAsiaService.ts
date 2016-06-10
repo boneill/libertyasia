@@ -13,19 +13,27 @@ import '../rxjs-operators';
 export class LibertyAsiaService{
 
     //getURL:string = "http://jsonplaceholder.typicode.com/posts/1";
-    getURL:string = "http://192.168.15.104:8080/alfresco/service/api/authentication";
+    getURL:string = "http://192.168.15.101:8080/alfresco/service/api/authentication";
     //getURL:string = "http://192.168.15.104:8080/alfresco/service/api/login?u=admin&pw=seed";
-    postURL:string = "http://192.168.15.104:8080/alfresco/service/api/login";
+    postURL:string = "http://192.168.15.101:8080/alfresco/service/api/login";
+
+    countriesUrl:string = "/app/countries.json";
 
     constructor (private http: Http) {}
 
-    getAlfData():any{
+    getCountries(){
+      return this.http.get(this.countriesUrl)
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+
+    getNGOColdList(){
         return this.http.get(this.getURL)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    postAlfData(){
-        let body = JSON.stringify({username:"admin", password:"seed"});
+    postAlfCredentials(){
+        let body = JSON.stringify({username:"admin", password:"admin"});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.postURL, body, options)
