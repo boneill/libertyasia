@@ -15,18 +15,19 @@ export class MediaFormComponent implements OnInit {
   //model = new MediaData(18, 'Originagtor Name',"Thailand", 'http://seedim.com.au', 'Person', 'My Headline', 'place of incorp', 'org type', 'Nationality', 21, '14/12/1971', 'male');
   model = new MediaData();
   submitted = false;
+  validNGOCode = true;
   personEntity = false;
   countries:any = [];
   ngoCodes:any = [];
   errorMessage: string;
-  alfTicket: string;
+  //alfTicket: string;
+  submitData:string;
   constructor(private libertyAsiaService:LibertyAsiaService) {}
 
   ngOnInit() {
     console.log("Components Loaded successfully") ;
     this.onGetCountries();
     this.onPostAlfCredentials();
-
   }
 
   onGetCountries(){
@@ -39,19 +40,45 @@ export class MediaFormComponent implements OnInit {
   onPostAlfCredentials(){
     this.libertyAsiaService.postAlfCredentials()
       .subscribe(
-        data => this.alfTicket = JSON.stringify(data),
-        error => this.errorMessage = <any>error
+        //data => this.alfTicket = JSON.stringify(data),
+        data => this.libertyAsiaService.alfTicket = data.data.ticket,
+        error => this.errorMessage = <any>error,
+        () => this.onGetNGOCodes()
       );
-    console.log(this.alfTicket);
   }
   onGetNGOCodes(){
-    this.libertyAsiaService.getNGOColdList()
+    this.libertyAsiaService.getNGOCodeList()
       .subscribe(
-        data => this.ngoCodes = data,
+        //data => this.ngoCodes = JSON.stringify(data),
+        data => this.ngoCodes = data.ngoCodes,
+        error => this.errorMessage = <any>error
+      );
+    console.log(JSON.stringify(this.ngoCodes));
+  }
+  validateNGOCode(): boolean{
+    for (let ngoCode of this.ngoCodes ) {
+      if (this.model.ngoCode != null) {
+        if (ngoCode.code == this.model.ngoCode) {
+          console.log("NGO Code valid: " + ngoCode.code);
+          this.validNGOCode = true;
+          break;
+        } else {
+          console.log("NGO Code inValid: " + ngoCode.code);
+          this.validNGOCode = false;
+        }
+      }
+    }
+    return this.validNGOCode;
+  }
+  onSubmit() {
+    this.submitted = true;
+    this.libertyAsiaService.postSubmit()
+      .subscribe(
+        data => this.submitData = JSON.stringify(data),
         error => this.errorMessage = <any>error
       );
   }
-  onSubmit() { this.submitted = true; }
+
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }

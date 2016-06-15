@@ -1,15 +1,18 @@
-{{diagnostic}}
+<!--{{diagnostic}}
+{{validNGOCode}}-->
+
 <div class="container">
   <h1>Media Monitoring Form</h1>
   <div  [hidden]="submitted">
     <form *ngIf="active" (ngSubmit)="onSubmit()" #mediaForm="ngForm">
       <div class="form-group">
         <label for="ngoCode">Code</label>
-        <input type="text" class="form-control" required
+        <input  (change) = "validateNGOCode()" type="text" class="form-control" required
             [(ngModel)]="model.ngoCode"
             ngControl="ngoCode"
                #ngoCode="ngForm"/>
         <div *ngIf ="ngoCode.dirty && !ngoCode.valid" class="alert alert-danger">Code is required</div>
+        <div *ngIf ="validNGOCode == false" class="alert alert-danger">Code is Invalid</div>
         <!--<div [hidden] ="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>-->
       </div>
 

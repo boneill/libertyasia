@@ -13,11 +13,13 @@ import '../rxjs-operators';
 export class LibertyAsiaService{
 
     //getURL:string = "http://jsonplaceholder.typicode.com/posts/1";
-    getURL:string = "http://192.168.15.101:8080/alfresco/service/api/authentication";
+    getURL:string = "http://192.168.0.17:8080/alfresco/service/api/authentication";
     //getURL:string = "http://192.168.15.104:8080/alfresco/service/api/login?u=admin&pw=seed";
-    postURL:string = "http://192.168.15.101:8080/alfresco/service/api/login";
-
+    authURL:string = "http://192.168.0.17:8080/alfresco/service/api/login";
+    submitURL:string = "http://192.168.0.17:8080/alfresco/service/seeksystem/mediamonitoring/createnode?alf_ticket=";
+    getNgoCodeURL:string = "http://192.168.0.17:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes?alf_ticket=";
     countriesUrl:string = "/app/countries.json";
+    alfTicket:string;
 
     constructor (private http: Http) {}
 
@@ -27,8 +29,8 @@ export class LibertyAsiaService{
         .catch(this.handleError);
     }
 
-    getNGOColdList(){
-        return this.http.get(this.getURL)
+    getNGOCodeList(){
+        return this.http.get(this.getNgoCodeURL + this.alfTicket)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -36,11 +38,19 @@ export class LibertyAsiaService{
         let body = JSON.stringify({username:"admin", password:"admin"});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.postURL, body, options)
+        return this.http.post(this.authURL, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
+    postSubmit(){
+      let body = JSON.stringify({ngoCode:"1234", subjectName:"Test"});
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.submitURL + this.alfTicket, body, options)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
 
     private extractData(res: Response) {
         let body = res.json();
