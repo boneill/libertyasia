@@ -96,5 +96,4 @@ export class MediaFormComponent implements OnInit {
     setTimeout(()=> this.active=true, 0);
     this.submitted=false;
   }
-
 }
