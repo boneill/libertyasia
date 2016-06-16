@@ -13,11 +13,11 @@ import '../rxjs-operators';
 export class LibertyAsiaService{
 
     //getURL:string = "http://jsonplaceholder.typicode.com/posts/1";
-    getURL:string = "http://192.168.0.17:8080/alfresco/service/api/authentication";
+    getURL:string = "http://192.168.15.109:8080/alfresco/service/api/authentication";
     //getURL:string = "http://192.168.15.104:8080/alfresco/service/api/login?u=admin&pw=seed";
-    authURL:string = "http://192.168.0.17:8080/alfresco/service/api/login";
-    submitURL:string = "http://192.168.0.17:8080/alfresco/service/seeksystem/mediamonitoring/createnode?alf_ticket=";
-    getNgoCodeURL:string = "http://192.168.0.17:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes?alf_ticket=";
+    authURL:string = "http://192.168.15.109:8080/alfresco/service/api/login";
+    submitURL:string = "http://192.168.15.109:8080/alfresco/service/seeksystem/mediamonitoring/createnode?alf_ticket=";
+    getNgoCodeURL:string = "http://192.168.15.109:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes?alf_ticket=";
     countriesUrl:string = "/app/countries.json";
     alfTicket:string;
 

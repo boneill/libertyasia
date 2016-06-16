@@ -1,5 +1,4 @@
-<!--{{diagnostic}}
-{{validNGOCode}}-->
+{{diagnostic}}
 
 <div class="container">
   <h1>Media Monitoring Form</h1>
@@ -27,19 +26,13 @@
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" required
+        <input type="text" class="form-control" required pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
              [(ngModel)]="model.email"
              ngControl="email" #email="ngForm" />
-        <div *ngIf ="email.dirty && !email.valid" class="alert alert-danger">Email is required</div>
+        <div *ngIf ="email.dirty && !email.valid" class="alert alert-danger">Please enter a valid email address</div>
         <!--<div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>-->
       </div>
-      <!--<div class="form-group">
-        <label for="countryOfOffence">Country of Offence</label>
-        <input type="text" class="form-control" required
-               [(ngModel)]="model.countryOfOffence"
-               ngControl="countryOfOffence" #country="ngForm" />
-        <div *ngIf ="country.dirty && !country.valid" class="alert alert-danger">Country of Offence is required</div>
-      </div>-->
+
       <div class="form-group">
         <label for="countryOfOffence">Country of Offence</label>
         <select class="form-control" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #organisationType="ngForm" required>
@@ -58,20 +51,26 @@
 
       <div class="form-group">
         <label for="sourceUrl">Source URL</label>
-        <input type="text" class="form-control" required
+        <input type="text" class="form-control" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
                [(ngModel)]="model.sourceUrl"
                ngControl="sourceUrl" #sourceUrl="ngForm" />
-        <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger">Source URL is required</div>
-        <!--<div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>-->
+        <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger">A valid Source URL is required</div>
       </div>
 
- <!--     <div class="form-group">
-        <label for="entityType">Entity Type</label>
+      <div class="form-group">
+        <label for="headline">Headline</label>
         <input type="text" class="form-control" required
-               [(ngModel)]="model.entityType"
-               ngControl="entityType" #entityType="ngForm" />
-        <div [hidden]="entityType.valid || entityType.pristine" class="alert alert-danger">Entity Type is required</div>
-      </div> -->
+               [(ngModel)]="model.headline"
+               ngControl="headline" #headline="ngForm" />
+        <div *ngIf ="headline.dirty && !headline.valid" class="alert alert-danger">A value for Headline is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="additionalInformation">Additional Information</label>
+        <textarea rows="4" class="form-control"
+               [(ngModel)]="model.additionalInformation"
+               ngControl="additionalInformation" #additionalInformation="ngForm" ></textarea>
+      </div>
 
       <div class="form-group">
         <div class="input-controls">
@@ -113,9 +112,10 @@
 
         <div class="form-group">
           <label for="age">Age</label>
-          <input type="text" class="form-control"
+          <input type="text" class="form-control" maxlength="2" pattern="^(0?[1-9]|[1-9][0-9])$"
                  [(ngModel)]="model.age"
                  ngControl="age" #age="ngForm" />
+          <div *ngIf ="age.dirty && !age.valid" class="alert alert-danger">Age must be between 1 and 99 years</div>
         </div>
 
         <!--<div class="form-group">
@@ -166,14 +166,15 @@
           <!--<div [hidden]="placeOfIncorporation.valid || placeOfIncorporation.pristine" class="alert alert-danger">Place of Incorporation is required for an Entity</div>-->
         </div>
 
+        <!--
        <div class="form-group">
           <label for="organisationType">Organisation Type</label>
           <input type="text" class="form-control" required
                  [(ngModel)]="model.organisationType"
                  ngControl="organisationType" #organisationType="ngForm" />
           <div *ngIf ="organisationType.dirty && !organisationType.valid" class="alert alert-danger">Organisation Type is required for an Entity</div>
-          <!--<div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>-->
-        </div>
+        </div> -->
+
         <!-- Drop Down Version -->
         <!--<div class="form-group">
           <label for="organisationType">Organisation Type</label>
@@ -192,13 +193,13 @@
       </div>
 
       <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newMediaSubmission()">Reset Form</button>
+      <button type="button" class="btn btn-default" (click)="resetMediaSubmission()">Reset Form</button>
     </form>
   </div>
   <!--<div [hidden]="!submitted">-->
   <div *ngIf="submitted">
     <h2>Your information has been submitted. </h2>
     <br>
-    <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">New Media Submission</button>
+    <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">Submit another Media Item</button>
   </div>
 </div>
