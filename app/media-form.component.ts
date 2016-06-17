@@ -27,7 +27,8 @@ export class MediaFormComponent implements OnInit {
   ngOnInit() {
     console.log("Components Loaded successfully") ;
     this.onGetCountries();
-    this.onPostAlfCredentials();
+    this.onGetNGOCodes();
+    //this.onPostAlfCredentials();
   }
 
   onGetCountries(){
@@ -51,9 +52,9 @@ export class MediaFormComponent implements OnInit {
       .subscribe(
         //data => this.ngoCodes = JSON.stringify(data),
         data => this.ngoCodes = data.ngoCodes,
-        error => this.errorMessage = <any>error
+        error => this.errorMessage = <any>error,
+        () => console.log(JSON.stringify(this.ngoCodes))
       );
-    console.log(JSON.stringify(this.ngoCodes));
   }
   validateNGOCode(): boolean{
     for (let ngoCode of this.ngoCodes ) {
@@ -72,10 +73,11 @@ export class MediaFormComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    this.libertyAsiaService.postSubmit()
+    this.libertyAsiaService.postSubmit(this.model)
       .subscribe(
         data => this.submitData = JSON.stringify(data),
-        error => this.errorMessage = <any>error
+        error => this.errorMessage = <any>error,
+        () => console.log(this.errorMessage)
       );
   }
 

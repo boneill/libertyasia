@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 //import { Observable }     from '../../node_modules/rxjs/observable';
 import { Observable }     from '../../node_modules/rxjs/Observable';
 import '../rxjs-operators';
+import {MediaData} from "../media-data";
 //import '../../node_modules/rxjs/Rx';
 
 
@@ -13,11 +14,13 @@ import '../rxjs-operators';
 export class LibertyAsiaService{
 
     //getURL:string = "http://jsonplaceholder.typicode.com/posts/1";
-    getURL:string = "http://192.168.15.109:8080/alfresco/service/api/authentication";
+    //getURL:string = "http://192.168.15.101:8080/alfresco/service/api/authentication";
     //getURL:string = "http://192.168.15.104:8080/alfresco/service/api/login?u=admin&pw=seed";
-    authURL:string = "http://192.168.15.109:8080/alfresco/service/api/login";
-    submitURL:string = "http://192.168.15.109:8080/alfresco/service/seeksystem/mediamonitoring/createnode?alf_ticket=";
-    getNgoCodeURL:string = "http://192.168.15.109:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes?alf_ticket=";
+    authURL:string = "http://192.168.15.101:8080/alfresco/service/api/login";
+    //submitURL:string = "http://192.168.15.101:8080/alfresco/service/seeksystem/mediamonitoring/createnode?alf_ticket=";
+    submitURL:string = "http://192.168.15.101:8080/alfresco/service/seeksystem/mediamonitoring/createnode";
+    //getNgoCodeURL:string = "http://192.168.15.101:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes?alf_ticket=";
+    getNgoCodeURL:string = "http://192.168.15.101:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes";
     countriesUrl:string = "/app/countries.json";
     alfTicket:string;
 
@@ -30,7 +33,8 @@ export class LibertyAsiaService{
     }
 
     getNGOCodeList(){
-        return this.http.get(this.getNgoCodeURL + this.alfTicket)
+        //return this.http.get(this.getNgoCodeURL + this.alfTicket)
+        return this.http.get(this.getNgoCodeURL)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -43,11 +47,13 @@ export class LibertyAsiaService{
             .catch(this.handleError);
     }
 
-    postSubmit(){
-      let body = JSON.stringify({ngoCode:"1234", subjectName:"Test"});
+    postSubmit(model:MediaData){
+      //let body = JSON.stringify({ngoCode:"1234", subjectName:"Test"});
+      let body = JSON.stringify(model);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.submitURL + this.alfTicket, body, options)
+      //return this.http.post(this.submitURL + this.alfTicket, body, options)
+      return this.http.post(this.submitURL, body, options)
           .map(this.extractData)
           .catch(this.handleError);
     }
