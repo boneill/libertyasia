@@ -15,30 +15,22 @@
         <!--<div [hidden] ="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>-->
       </div>
 
-      <div class="form-group">
+<!--      <div class="form-group">
         <label for="originatorName">Originator Name</label>
         <input type="text" class="form-control" required
              [(ngModel)]="model.originatorName"
              ngControl="originatorName" #originatorName="ngForm"/>
         <div *ngIf ="originatorName.dirty && !originatorName.valid" class="alert alert-danger">Originator Name is required</div>
-        <!--<div [hidden]="originatorName.valid || originatorName.pristine" class="alert alert-danger">Originator Name is required</div>-->
-      </div>
+      </div> -->
 
-      <div class="form-group">
+ <!--     <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" required pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
              [(ngModel)]="model.email"
              ngControl="email" #email="ngForm" />
         <div *ngIf ="email.dirty && !email.valid" class="alert alert-danger">Please enter a valid email address</div>
-        <!--<div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>-->
-      </div>
 
-      <div class="form-group">
-        <label for="countryOfOffence">Country of Offence</label>
-        <select class="form-control" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #organisationType="ngForm" required>
-          <option *ngFor="let country of countries">{{country.name}}</option>
-        </select>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="subjectName">Subject Name</label>
@@ -46,7 +38,13 @@
                [(ngModel)]="model.subjectName"
                ngControl="subjectName" #subjectName="ngForm" />
         <div *ngIf ="subjectName.dirty && !subjectName.valid" class="alert alert-danger">Subject Name is required</div>
-        <!--<div [hidden]="sourceUrl.valid || sourceUrl.pristine" class="alert alert-danger">Source URL is required</div>-->
+      </div>
+
+      <div class="form-group">
+        <label for="countryOfOffence">Country of Offence</label>
+        <select class="form-control" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #countryOfOffence="ngForm" required>
+          <option *ngFor="let country of countries">{{country.name}}</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -66,7 +64,7 @@
       </div>
 
       <div class="form-group">
-        <label for="additionalInformation">Additional Information</label>
+        <label for="additionalInformation">Additional Background Details</label>
         <textarea rows="4" class="form-control"
                [(ngModel)]="model.additionalInformation"
                ngControl="additionalInformation" #additionalInformation="ngForm" ></textarea>
@@ -103,11 +101,14 @@
 
         <div class="form-group">
           <label for="nationality">Nationality (Individual)</label>
-          <input type="text" class="form-control" required
-                 [(ngModel)]="model.nationality"
-                 ngControl="nationality" #nationality="ngForm" />
+          <!-- <input type="text" class="form-control"                  [(ngModel)]="model.nationality"
+                 ngControl="nationality" #nationality="ngForm" /> -->
+
+          <select class="form-control" [(ngModel)]="model.nationality" ngControl="nationality" #nationality="ngForm" >
+            <option *ngFor="let country of countries">{{country.name}}</option>
+          </select>
+
           <div *ngIf ="nationality.dirty && !nationality.valid" class="alert alert-danger">Nationality is required</div>
-          <!--<div [hidden]="nationality.valid || nationality.pristine" class="alert alert-danger">Nationality is required</div>-->
         </div>
 
         <div class="form-group">
@@ -155,7 +156,7 @@
       </div>
 
       <!-- Organisation Inputs -->
-      <div *ngIf="model.entityType == 'Entity'">
+ <!--     <div *ngIf="model.entityType == 'Entity'">
 
         <div class="form-group">
           <label for="placeOfIncorporation">Place of Incorporation</label>
@@ -163,35 +164,25 @@
                  [(ngModel)]="model.placeOfIncorporation"
                  ngControl="placeOfIncorporation" #placeOfIncorporation="ngForm" />
           <div *ngIf ="placeOfIncorporation.dirty && !placeOfIncorporation.valid" class="alert alert-danger">Place of Incorporation is required for an Entity</div>
-          <!--<div [hidden]="placeOfIncorporation.valid || placeOfIncorporation.pristine" class="alert alert-danger">Place of Incorporation is required for an Entity</div>-->
+
         </div>
 
-        <!--
+
        <div class="form-group">
           <label for="organisationType">Organisation Type</label>
           <input type="text" class="form-control" required
                  [(ngModel)]="model.organisationType"
                  ngControl="organisationType" #organisationType="ngForm" />
           <div *ngIf ="organisationType.dirty && !organisationType.valid" class="alert alert-danger">Organisation Type is required for an Entity</div>
-        </div> -->
+        </div>
 
-        <!-- Drop Down Version -->
-        <!--<div class="form-group">
-          <label for="organisationType">Organisation Type</label>
-          <select class="form-control" [(ngModel)]="model.organisationType" ngControl="organisationType" #organisationType="ngForm" required>
-            <option></option>
-            <option>Corporation</option>
-            <option>Company</option>
-            <option>Club</option>
-            <option>4</option>
-          </select>
-          <div [hidden]="organisationType.valid || organisationType.pristine" class="alert alert-danger">Organisation Type is required for an Entity</div>
-        </div>-->
+
 
 
 
       </div>
 
+  -->
       <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid">Submit</button>
       <button type="button" class="btn btn-default" (click)="resetMediaSubmission()">Reset Form</button>
     </form>
