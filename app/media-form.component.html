@@ -82,7 +82,7 @@
           </div>
           <div>
             <label>
-              <input #entity name="entityType" type="radio"  value="Entity" (click)="model.entityType = entity.value;"  />
+              <input #organisation name="entityType" type="radio"  value="Organisation" (click)="model.entityType = organisation.value;"  />
               Organisation
             </label>
           </div>
@@ -144,7 +144,7 @@
             </div>
 
             <div hidden>
-              <input type="text" class="form-control" required
+              <input type="text" class="form-control"
                      [(ngModel)]="model.gender"
                      ngControl="gender" #gender="ngForm" />
             </div>
