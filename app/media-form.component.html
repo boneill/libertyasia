@@ -54,7 +54,19 @@
                ngControl="sourceUrl" #sourceUrl="ngForm" />
         <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger">A valid Source URL is required</div>
       </div>
+      <div class="form-group">
+        <label for="optSourceUrl1">Additional Source URLs</label>
+        <input type="text" class="form-control" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+               [(ngModel)]="model.optSourceUrl1"
+               ngControl="optSourceUrl1" #optSourceUrl1="ngForm" />
+        <div *ngIf ="optSourceUrl1.dirty && !optSourceUrl1.valid" class="alert alert-danger">A valid Optional Source URL is required</div>
+        <label for="optSourceUrl2"></label>
+        <input type="text" class="form-control" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+               [(ngModel)]="model.optSourceUrl2"
+               ngControl="optSourceUrl2" #optSourceUrl2="ngForm" />
+        <div *ngIf ="optSourceUrl2.dirty && !optSourceUrl2.valid" class="alert alert-danger">A valid Optional Source URL is required</div>
 
+      </div>
       <div class="form-group">
         <label for="headline">Headline</label>
         <input type="text" class="form-control" required

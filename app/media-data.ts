@@ -6,6 +6,8 @@ export class MediaData {
     public countryOfOffence?: string,
     public subjectName?: string,
     public sourceUrl?: string,
+    public optSourceUrl1?: string,
+    public optSourceUrl2?: string,
     public entityType?: string,
     public headline?: string,
     public additionalInformation?:string,
