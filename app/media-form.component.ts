@@ -10,6 +10,7 @@ import { LibertyAsiaService } from './services/libertyAsiaService';
 })
 export class MediaFormComponent implements OnInit {
 
+  submissionResponse: string;
   active = true;
   model = new MediaData();
   submitted = false;
@@ -18,7 +19,7 @@ export class MediaFormComponent implements OnInit {
   countries:any = [];
   ngoCodes:any = [];
   errorMessage: string;
-  submitData:string;
+  submitData:any;
   constructor(private libertyAsiaService:LibertyAsiaService) {}
 
   ngOnInit() {
@@ -60,13 +61,30 @@ export class MediaFormComponent implements OnInit {
     return this.validNGOCode;
   }
 
-  onSubmit() {
+  submitComplete(){
+
+    if(this.submitData.success != null)
+    {
+      this.submissionResponse = this.submitData.success;
+      console.log(this.submitData.success);
+    }
+    else
+    {
+      this.submissionResponse = this.submitData.error;
+      console.log(this.submitData.error);
+      //console.log(this.errorMessage)
+    }
     this.submitted = true;
+  };
+
+  onSubmit() {
+
     this.libertyAsiaService.postSubmit(this.model)
       .subscribe(
-        data => this.submitData = JSON.stringify(data),
+        //data => this.submitData = JSON.stringify(data),
+        data => this.submitData = data,
         error => this.errorMessage = <any>error,
-        () => console.log(this.errorMessage)
+        () => this.submitComplete()
       );
   }
 

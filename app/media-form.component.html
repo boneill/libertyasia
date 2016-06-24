@@ -143,7 +143,17 @@
   </div>
 
   <div *ngIf="submitted == true">
-    <h2>Your information has been submitted. </h2>
+
+    <div class="submit submit-response" *ngIf="submitData.success != null">
+      <h2>The Media Monitoring details have been submitted to SKS. </h2>
+    </div>
+
+    <div *ngIf="submitData.error != null" class="alert alert-danger">
+      <h2>Submission Failed. </h2>
+      <h3>{{submissionResponse}}</h3>
+    </div>
+
+
     <br>
     <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">Submit another Media Item</button>
   </div>
