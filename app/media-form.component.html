@@ -1,8 +1,6 @@
-{{diagnostic}}
-
 <div class="container">
   <h1>Media Monitoring Form</h1>
-  <div  [hidden]="submitted">
+  <div  *ngIf="submitted == false">
     <form *ngIf="active" (ngSubmit)="onSubmit()" #mediaForm="ngForm">
       <div class="form-group">
         <label for="ngoCode">Code</label>
@@ -12,25 +10,7 @@
                #ngoCode="ngForm"/>
         <div *ngIf ="ngoCode.dirty && !ngoCode.valid" class="alert alert-danger">Code is required</div>
         <div *ngIf ="validNGOCode == false" class="alert alert-danger">Code is Invalid</div>
-        <!--<div [hidden] ="ngoCode.valid || ngoCode.pristine" class="alert alert-danger">Code is required</div>-->
       </div>
-
-<!--      <div class="form-group">
-        <label for="originatorName">Originator Name</label>
-        <input type="text" class="form-control" required
-             [(ngModel)]="model.originatorName"
-             ngControl="originatorName" #originatorName="ngForm"/>
-        <div *ngIf ="originatorName.dirty && !originatorName.valid" class="alert alert-danger">Originator Name is required</div>
-      </div> -->
-
- <!--     <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" required pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
-             [(ngModel)]="model.email"
-             ngControl="email" #email="ngForm" />
-        <div *ngIf ="email.dirty && !email.valid" class="alert alert-danger">Please enter a valid email address</div>
-
-      </div> -->
 
       <div class="form-group">
         <label for="subjectName">Subject Name</label>
@@ -113,9 +93,6 @@
 
         <div class="form-group">
           <label for="nationality">Nationality (Individual)</label>
-          <!-- <input type="text" class="form-control"                  [(ngModel)]="model.nationality"
-                 ngControl="nationality" #nationality="ngForm" /> -->
-
           <select class="form-control" [(ngModel)]="model.nationality" ngControl="nationality" #nationality="ngForm" >
             <option *ngFor="let country of countries">{{country.name}}</option>
           </select>
@@ -130,13 +107,6 @@
                  ngControl="age" #age="ngForm" />
           <div *ngIf ="age.dirty && !age.valid" class="alert alert-danger">Age must be between 1 and 99 years</div>
         </div>
-
-        <!--<div class="form-group">
-          <label for="dob">Date of Birth</label>
-          <input type="date" class="form-control"
-                 [(ngModel)]="model.dob"
-                 ngControl="dob" #dob="ngForm" />
-        </div>-->
 
         <div class="form-group">
           <div class="input-controls">
@@ -167,40 +137,12 @@
 
       </div>
 
-      <!-- Organisation Inputs -->
- <!--     <div *ngIf="model.entityType == 'Entity'">
-
-        <div class="form-group">
-          <label for="placeOfIncorporation">Place of Incorporation</label>
-          <input type="text" class="form-control" required
-                 [(ngModel)]="model.placeOfIncorporation"
-                 ngControl="placeOfIncorporation" #placeOfIncorporation="ngForm" />
-          <div *ngIf ="placeOfIncorporation.dirty && !placeOfIncorporation.valid" class="alert alert-danger">Place of Incorporation is required for an Entity</div>
-
-        </div>
-
-
-       <div class="form-group">
-          <label for="organisationType">Organisation Type</label>
-          <input type="text" class="form-control" required
-                 [(ngModel)]="model.organisationType"
-                 ngControl="organisationType" #organisationType="ngForm" />
-          <div *ngIf ="organisationType.dirty && !organisationType.valid" class="alert alert-danger">Organisation Type is required for an Entity</div>
-        </div>
-
-
-
-
-
-      </div>
-
-  -->
-      <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid && validNGOCode">Submit</button>
       <button type="button" class="btn btn-default" (click)="resetMediaSubmission()">Reset Form</button>
     </form>
   </div>
-  <!--<div [hidden]="!submitted">-->
-  <div *ngIf="submitted">
+
+  <div *ngIf="submitted == true">
     <h2>Your information has been submitted. </h2>
     <br>
     <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">Submit another Media Item</button>
