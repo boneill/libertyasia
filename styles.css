@@ -11,6 +11,8 @@ h2, h3 {
 }
 body {
   margin: 2em;
+  background-image: url(./images/background-media-monitoring-02-03.png);
+
 }
 body, input[text], button {
   color: #888;

@@ -41,7 +41,8 @@ export class MediaFormComponent implements OnInit {
       .subscribe(
         data => this.ngoCodes = data.ngoCodes,
         error => this.errorMessage = <any>error,
-        () => console.log(JSON.stringify(this.ngoCodes))
+        //() => console.log(JSON.stringify(this.ngoCodes))
+        () => console.log("NGO Codes Retrieved successfully")
       );
   }
 

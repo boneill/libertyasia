@@ -1,71 +1,130 @@
-<div class="container">
-  <h1>Media Monitoring Form</h1>
+<div class="container fr_container">
+  <div class="fr_image"> <img src="images/la-logo1.png" /></div>
+  <div class="fr_text_bright_center fr_text_79M">
+    <div class="fr-text">
+      <h2>Media Monitoring Submission Form</h2>
+    </div>
+  </div>
   <div  *ngIf="submitted == false">
     <form *ngIf="active" (ngSubmit)="onSubmit()" #mediaForm="ngForm">
       <div class="form-group">
-        <label for="ngoCode">Code</label>
-        <input  (change) = "validateNGOCode()" type="text" class="form-control" required
+        <!--<label for="ngoCode">Code</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Code</h4>
+          </div>
+        </div>
+        <input  (change) = "validateNGOCode()" type="text" class="form-control fr_input_6" required
             [(ngModel)]="model.ngoCode"
             ngControl="ngoCode"
                #ngoCode="ngForm"/>
-        <div *ngIf ="ngoCode.dirty && !ngoCode.valid" class="alert alert-danger">Code is required</div>
-        <div *ngIf ="validNGOCode == false" class="alert alert-danger">Code is Invalid</div>
+        <div *ngIf ="ngoCode.dirty && !ngoCode.valid" class="alert alert-danger fr_alert">
+          <h4>Code is required</h4>
+        </div>
+        <div *ngIf ="validNGOCode == false" class="alert alert-danger fr_alert">
+          <h4>Code is Invalid</h4>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="subjectName">Subject Name</label>
-        <input type="text" class="form-control" required
+        <!--<label for="subjectName">Subject Name</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Subject Name</h4>
+          </div>
+        </div>
+        <input type="text" class="form-control fr_input_7" required
                [(ngModel)]="model.subjectName"
                ngControl="subjectName" #subjectName="ngForm" />
-        <div *ngIf ="subjectName.dirty && !subjectName.valid" class="alert alert-danger">Subject Name is required</div>
+        <div *ngIf ="subjectName.dirty && !subjectName.valid" class="alert alert-danger fr_alert">
+          <h4>Subject Name is required</h4>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="countryOfOffence">Country of Offence</label>
-        <select class="form-control" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #countryOfOffence="ngForm" required>
+        <!--<label for="countryOfOffence">Country of Offence</label>-->
+        <!--<label for="countryOfOffence">Location</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Location</h4>
+          </div>
+        </div>
+        <select class="form-control fr_input_8" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #countryOfOffence="ngForm" required>
           <option *ngFor="let country of countries">{{country.name}}</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="sourceUrl">Source URL</label>
-        <input type="text" class="form-control" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+        <!--<label for="sourceUrl">Source URL</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Source URL</h4>
+          </div>
+        </div>
+        <input type="text" class="form-control fr_input_9" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
                [(ngModel)]="model.sourceUrl"
                ngControl="sourceUrl" #sourceUrl="ngForm" />
-        <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger">A valid Source URL is required</div>
+        <div *ngIf ="sourceUrl.dirty && !sourceUrl.valid" class="alert alert-danger fr_alert">
+          <h4>A valid Source URL is required</h4>
+        </div>
       </div>
       <div class="form-group">
-        <label for="optSourceUrl1">Additional Source URLs</label>
-        <input type="text" class="form-control" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+        <!--<label for="optSourceUrl1">Additional Source URLs</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Additional Source URLs</h4>
+          </div>
+        </div>
+        <input type="text" class="form-control fr_input_10" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
                [(ngModel)]="model.optSourceUrl1"
                ngControl="optSourceUrl1" #optSourceUrl1="ngForm" />
-        <div *ngIf ="optSourceUrl1.dirty && !optSourceUrl1.valid" class="alert alert-danger">A valid Optional Source URL is required</div>
-        <label for="optSourceUrl2"></label>
-        <input type="text" class="form-control" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+        <div *ngIf ="optSourceUrl1.dirty && !optSourceUrl1.valid" class="alert alert-danger fr_alert">
+          <h4>A valid Optional Source URL is required</h4>
+        </div>
+        <!--<label for="optSourceUrl2"></label>-->
+          <div class="fr-text">
+            <h4></h4>
+          </div>
+        <input type="text" class="form-control fr_input_11" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
                [(ngModel)]="model.optSourceUrl2"
                ngControl="optSourceUrl2" #optSourceUrl2="ngForm" />
-        <div *ngIf ="optSourceUrl2.dirty && !optSourceUrl2.valid" class="alert alert-danger">A valid Optional Source URL is required</div>
+        <div *ngIf ="optSourceUrl2.dirty && !optSourceUrl2.valid" class="alert alert-danger fr_alert">
+          <h4>A valid Optional Source URL is required</h4>
+        </div>
 
       </div>
       <div class="form-group">
-        <label for="headline">Headline</label>
-        <input type="text" class="form-control" required
+        <!--<label for="headline">Headline</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Headline</h4>
+          </div>
+        </div>
+        <input type="text" class="form-control fr_input_12" required
                [(ngModel)]="model.headline"
                ngControl="headline" #headline="ngForm" />
-        <div *ngIf ="headline.dirty && !headline.valid" class="alert alert-danger">A value for Headline is required</div>
+        <div *ngIf ="headline.dirty && !headline.valid" class="alert alert-danger fr_alert">
+          <h4>A value for Headline is required</h4>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="additionalInformation">Additional Background Details</label>
-        <textarea rows="4" class="form-control"
+        <!--<label for="additionalInformation">Additional Background Details</label>-->
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <h4>Additional Background Details</h4>
+          </div>
+        </div>
+        <textarea rows="4" class="form-control fr_html_2"
                [(ngModel)]="model.additionalInformation"
                ngControl="additionalInformation" #additionalInformation="ngForm" ></textarea>
       </div>
 
       <div class="form-group">
-        <div class="input-controls">
+        <div class="input-controls fr_html_2M">
 
-          <label for="entityType">Entity Type</label>
+          <!--<label for="entityType">Entity Type</label>-->
+          <label for="entityType">Subject Type</label>
           <div>
             <label>
               <input #person name="entityType" type="radio" value="Person"  (click)="model.entityType = person.value;" />
@@ -92,26 +151,45 @@
       <div *ngIf="model.entityType == 'Person'">
 
         <div class="form-group">
-          <label for="nationality">Nationality (Individual)</label>
-          <select class="form-control" [(ngModel)]="model.nationality" ngControl="nationality" #nationality="ngForm" >
+          <!--<label for="nationality">Nationality (Individual)</label>-->
+          <div class="fr_text_block">
+            <div class="fr-text">
+              <h4>Nationality (Individual)</h4>
+            </div>
+          </div>
+          <select class="form-control fr_input_8" [(ngModel)]="model.nationality" ngControl="nationality" #nationality="ngForm" >
             <option *ngFor="let country of countries">{{country.name}}</option>
           </select>
 
-          <div *ngIf ="nationality.dirty && !nationality.valid" class="alert alert-danger">Nationality is required</div>
+          <div *ngIf ="nationality.dirty && !nationality.valid" class="alert alert-danger fr_alert">
+            <h4>Nationality is required</h4>
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="text" class="form-control" maxlength="2" pattern="^(0?[1-9]|[1-9][0-9])$"
+          <!--<label for="age">Age</label>-->
+          <div class="fr_text_block">
+            <div class="fr-text">
+              <h4>Age</h4>
+            </div>
+          </div>
+          <input type="text" class="form-control fr_input_7" maxlength="2" pattern="^(0?[1-9]|[1-9][0-9])$"
                  [(ngModel)]="model.age"
                  ngControl="age" #age="ngForm" />
-          <div *ngIf ="age.dirty && !age.valid" class="alert alert-danger">Age must be between 1 and 99 years</div>
+          <div *ngIf ="age.dirty && !age.valid" class="alert alert-danger fr_alert">
+            <h4>Age must be between 1 and 99 years</h4>
+          </div>
         </div>
 
         <div class="form-group">
-          <div class="input-controls">
+          <div class="input-controls fr_html_2M">
 
-            <label for="gender">Gender</label>
+            <!--<label for="gender">Gender</label>-->
+            <div class="fr_text_block">
+              <div class="fr-text">
+                <h4>Gender</h4>
+              </div>
+            </div>
             <div>
               <label>
                 <input #male name="gender" type="radio" value="Male"  (click)="model.gender = male.value;" />
@@ -133,28 +211,40 @@
 
           </div>
         </div>
-
-
       </div>
-
-      <button type="submit" class="btn btn-default" [disabled]="!mediaForm.form.valid && validNGOCode">Submit</button>
-      <button type="button" class="btn btn-default" (click)="resetMediaSubmission()">Reset Form</button>
+      <div class="fr_grid">
+        <button type="submit" class="btn fr_button_fill_grey fr_button9" [disabled]="!mediaForm.form.valid">
+          <div class="fr-text">Submit</div>
+        </button>
+        <!--<button type="button" class="btn btn-default fr_button_fill_grey fr_button9" (click)="resetMediaSubmission()">-->
+        <button type="button" class="btn fr_button_fill_grey fr_button9" (click)="resetMediaSubmission()">
+          <div class="fr-text">Reset Form</div>
+        </button>
+      </div>
     </form>
+    <div class="fr_footer_3">
+      <div class="fr_text_dark_center fr_text_73">
+        <div class="fr-text">
+          <p>Contact Support:<a href="mailto:OSINT@libertyasia.org">OSINT@libertyasia.org</a></p>
+          <p>© 2016 Liberty Asia, of Share (Asia Pacific) Limited, a HK-registered charitable organisation.</p>
+          <p>Share (Asia Pacific) Limited, which runs the programme Liberty Asia, gives no assurance that information provided by submitting a completed form will be acted upon and may, at its sole discretion, reject any submission.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="submitted == true">
 
-    <div class="submit submit-response" *ngIf="submitData.success != null">
+    <div class="submit submit-response fr_response" *ngIf="submitData.success != null">
       <h2>The Media Monitoring details have been submitted to SKS. </h2>
     </div>
 
-    <div *ngIf="submitData.error != null" class="alert alert-danger">
+    <div *ngIf="submitData.error != null" class="alert alert-danger fr_response_alert">
       <h2>Submission Failed. </h2>
-      <h3>{{submissionResponse}}</h3>
+      <h4>{{submissionResponse}}</h4>
     </div>
-
-
-    <br>
-    <button class="btn btn-default" (click)="submitted=false; newMediaSubmission()">Submit another Media Item</button>
+    <div class="fr_grid">
+      <button class="btn btn fr_button_fill_grey fr_button9_2" (click)="submitted=false; newMediaSubmission()">Submit another Media Item</button>
+    </div>
   </div>
 </div>
