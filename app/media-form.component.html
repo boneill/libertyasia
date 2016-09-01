@@ -11,7 +11,7 @@
         <!--<label for="ngoCode">Code</label>-->
         <div class="fr_text_block">
           <div class="fr-text">
-            <h4>Code</h4>
+            <h4>Code *</h4>
           </div>
         </div>
         <input  (change) = "validateNGOCode()" type="text" class="form-control fr_input_6" required
@@ -30,7 +30,7 @@
         <!--<label for="subjectName">Subject Name</label>-->
         <div class="fr_text_block">
           <div class="fr-text">
-            <h4>Subject Name</h4>
+            <h4>Subject Name *</h4>
           </div>
         </div>
         <input type="text" class="form-control fr_input_7" required
@@ -46,7 +46,7 @@
         <!--<label for="countryOfOffence">Location</label>-->
         <div class="fr_text_block">
           <div class="fr-text">
-            <h4>Location</h4>
+            <h4>Location *</h4>
           </div>
         </div>
         <select class="form-control fr_input_8" [(ngModel)]="model.countryOfOffence" ngControl="countryOfOffence" #countryOfOffence="ngForm" required>
@@ -58,7 +58,7 @@
         <!--<label for="sourceUrl">Source URL</label>-->
         <div class="fr_text_block">
           <div class="fr-text">
-            <h4>Source URL</h4>
+            <h4>Source URL *</h4>
           </div>
         </div>
         <input type="text" class="form-control fr_input_9" required pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
@@ -97,7 +97,7 @@
         <!--<label for="headline">Headline</label>-->
         <div class="fr_text_block">
           <div class="fr-text">
-            <h4>Headline</h4>
+            <h4>Headline *</h4>
           </div>
         </div>
         <input type="text" class="form-control fr_input_12" required
@@ -212,7 +212,13 @@
           </div>
         </div>
       </div>
+
       <div class="fr_grid">
+        <div class="fr_text_block">
+          <div class="fr-text">
+            <p>* Mandatory fields</p>
+          </div>
+        </div>
         <button type="submit" class="btn fr_button_fill_grey fr_button9" [disabled]="!mediaForm.form.valid">
           <div class="fr-text">Submit</div>
         </button>
@@ -225,7 +231,7 @@
     <div class="fr_footer_3">
       <div class="fr_text_dark_center fr_text_73">
         <div class="fr-text">
-          <p>Contact Support:<a href="mailto:OSINT@libertyasia.org">OSINT@libertyasia.org</a></p>
+          <p>Contact Support:<a href="mailto:mediamonitoring@libertyasia.org">mediamonitoring@libertyasia.org</a></p>
           <p>© 2016 Liberty Asia, of Share (Asia Pacific) Limited, a HK-registered charitable organisation.</p>
           <p>Share (Asia Pacific) Limited, which runs the programme Liberty Asia, gives no assurance that information provided by submitting a completed form will be acted upon and may, at its sole discretion, reject any submission.</p>
         </div>

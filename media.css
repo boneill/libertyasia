@@ -69,9 +69,9 @@ h4 {
   font-family: Arial;
   margin-right: auto;
   margin-left: auto;
-  background-image: url(./images/background-media-monitoring-02-02.png);
+  /**background-image: url(./images/background-media-monitoring-02-02.png);
   background-position: center center;
-  background-size: cover;
+  background-size: cover;**/
   min-height: 150vh
 }
 

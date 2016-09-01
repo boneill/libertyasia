@@ -94,7 +94,15 @@ export class MediaFormComponent implements OnInit {
   //get diagnostic() { return JSON.stringify(this.model); }
 
   newMediaSubmission(){
-    this.model = new MediaData(this.model.ngoCode);
+
+    this.model.subjectName = "";
+    this.model.entityType = "";
+    this.model.nationality = "";
+    this.model.age = "";
+    this.model.gender = "";
+    /***this.model = new MediaData(this.model.ngoCode,this.model.subjectName,this.model.countryOfOffence,this.model.sourceUrl,this.model.optSourceUrl1,
+      this.model.optSourceUrl2,this.model.headline,this.model.additionalInformation,this.model.entityType,this.model.nationality,
+      this.model.age, this.model.gender);**/
     this.active = false;
     setTimeout(()=> this.active=true, 0);
     this.submitted=false;

@@ -10,7 +10,7 @@ export class MediaData {
     public headline?: string,
     public additionalInformation?:string,
     public nationality?: string,
-    public age?: number,
+    public age?: string,
     public gender?: string
 
   ) {  }
