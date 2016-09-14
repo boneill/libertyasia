@@ -3,6 +3,11 @@ h4 {
   font-size: 1.0rem;
   color: #534b4b
 }
+h3 {
+  font-family: Arial;
+  font-size: 1.0rem;
+  color: #534b4b
+}
 
 .fr_text_bright_center {
   font-family: Arial;
@@ -111,6 +116,7 @@ h4 {
   float: none;
   display: block;
   text-align: left;
+  color: #000000;
   width: 100%;
   margin-top: 5px;
   margin-right: auto;

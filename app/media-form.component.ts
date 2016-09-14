@@ -95,11 +95,11 @@ export class MediaFormComponent implements OnInit {
 
   newMediaSubmission(){
 
-    this.model.subjectName = "";
-    this.model.entityType = "";
-    this.model.nationality = "";
-    this.model.age = "";
-    this.model.gender = "";
+    this.model.subjectName = null;
+    this.model.entityType = null;
+    this.model.nationality = null;
+    this.model.age = null;
+    this.model.gender = null;
     /***this.model = new MediaData(this.model.ngoCode,this.model.subjectName,this.model.countryOfOffence,this.model.sourceUrl,this.model.optSourceUrl1,
       this.model.optSourceUrl2,this.model.headline,this.model.additionalInformation,this.model.entityType,this.model.nationality,
       this.model.age, this.model.gender);**/
@@ -108,6 +108,25 @@ export class MediaFormComponent implements OnInit {
     this.submitted=false;
   }
 
+  scrollTop(){
+    window.scrollTo(0,0);
+  }
+  validateAge(){
+
+    if(parseFloat(this.model.age) > 0 && parseFloat(this.model.age) < 100){
+      console.log("Age already in range:" + this.model.age);
+    }else{
+      this.model.age = "99";
+      console.log("Age set to:" + this.model.age);
+    }
+  }
+  newSubmission(){
+
+    this.model = new MediaData(this.model.ngoCode);
+    this.active = false;
+    setTimeout(()=> this.active=true, 0);
+    this.submitted=false;
+  }
   resetMediaSubmission(){
     this.model = new MediaData();
     this.active = false;
