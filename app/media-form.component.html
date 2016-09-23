@@ -146,7 +146,7 @@
         <div class="input-controls fr_html_2M">
 
           <!--<label for="entityType">Entity Type</label>-->
-          <label for="entityType">Subject Type *</label>
+          <label for="entityType">Subject Type</label>
           <div>
             <label>
               <input #person name="entityType" type="radio" value="Person"  (click)="model.entityType = person.value;" />
@@ -161,7 +161,7 @@
           </div>
 
           <div hidden>
-            <input type="text" class="form-control" required
+            <input type="text" class="form-control"
                    [(ngModel)]="model.entityType"
                    ngControl="entityType" #entityType="ngForm" />
           </div>
