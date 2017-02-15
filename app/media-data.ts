@@ -11,6 +11,7 @@ export class MediaData {
     public additionalInformation?:string,
     public nationality?: string,
     public age?: string,
+    public recaptcha?: string,
     //public age?: number,
     public gender?: string
 

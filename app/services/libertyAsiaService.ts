@@ -2,8 +2,8 @@
  * Created by user on 27/05/2016.
  */
 import {Injectable} from "@angular/core";
+
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-//import { Observable }     from '../../node_modules/rxjs/observable';
 import { Observable }     from '../../node_modules/rxjs/Observable';
 import '../rxjs-operators';
 import {MediaData} from "../media-data";
@@ -17,8 +17,8 @@ export class LibertyAsiaService{
     submitURL:string = "https://www.seeksystem.org/alfresco/service/seeksystem/mediamonitoring/createnode";
     //getNgoCodeURL:string = "http://192.168.56.102:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes";
     getNgoCodeURL:string = "https://www.seeksystem.org/alfresco/service/seeksystem/mediamonitoring/ngocodes";
-    //countriesUrl:string = "/app/countries.json";
-    countriesUrl:string = "/media/app/countries.json";
+    countriesUrl:string = "/app/countries.json";
+    //countriesUrl:string = "/media/app/countries.json";
     alfTicket:string;
 
     constructor (private http: Http) {}

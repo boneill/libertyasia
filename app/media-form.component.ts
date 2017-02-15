@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+
+declare var grecaptcha: any;
+
+import { Component, AfterViewInit } from '@angular/core';
 import { NgForm }    from '@angular/common';
 import { MediaData } from './media-data';
 import { LibertyAsiaService } from './services/libertyAsiaService';
@@ -8,7 +11,7 @@ import { LibertyAsiaService } from './services/libertyAsiaService';
   providers: [ LibertyAsiaService ]
   //styleUrls: ['app/media-form.component.css']
 })
-export class MediaFormComponent implements OnInit {
+export class MediaFormComponent  {
 
   submissionResponse: string;
   active = true;
@@ -20,12 +23,15 @@ export class MediaFormComponent implements OnInit {
   ngoCodes:any = [];
   errorMessage: string;
   submitData:any;
-  constructor(private libertyAsiaService:LibertyAsiaService) {}
+  recaptcha: string = undefined;
 
-  ngOnInit() {
-    console.log("Components Loaded successfully") ;
+  constructor(private libertyAsiaService:LibertyAsiaService) {
     this.onGetCountries();
     this.onGetNGOCodes();
+  }
+  ngAfterViewInit() {
+    var this_ = this;
+    this.createRecaptcha();
   }
 
   onGetCountries(){
@@ -79,14 +85,22 @@ export class MediaFormComponent implements OnInit {
   };
 
   onSubmit() {
+    if (this.recaptcha) {
+      this.model.recaptcha = this.recaptcha;
 
-    this.libertyAsiaService.postSubmit(this.model)
-      .subscribe(
-        //data => this.submitData = JSON.stringify(data),
-        data => this.submitData = data,
-        error => this.errorMessage = <any>error,
-        () => this.submitComplete()
-      );
+      this.libertyAsiaService.postSubmit(this.model)
+        .subscribe(
+          //data => this.submitData = JSON.stringify(data),
+          data => this.submitData = data,
+          error => this.errorMessage = <any>error,
+          () => this.submitComplete()
+        );
+    } else {
+      var element = document.getElementById('recaptcha')
+      var top = element.offsetTop;
+      element.style.border = "solid red 1px";
+      window.scrollTo(0, top);
+    }
   }
 
 
@@ -106,11 +120,15 @@ export class MediaFormComponent implements OnInit {
     this.active = false;
     setTimeout(()=> this.active=true, 0);
     this.submitted=false;
+
+    var this_ = this;
+    setTimeout(()=> this_.createRecaptcha(), 500);
   }
 
   scrollTop(){
     window.scrollTo(0,0);
   }
+
   validateAge(){
 
     if(parseFloat(this.model.age) > 0 && parseFloat(this.model.age) < 100){
@@ -120,17 +138,38 @@ export class MediaFormComponent implements OnInit {
       console.log("Age set to:" + this.model.age);
     }
   }
+  createRecaptcha() {
+    var this_ = this;
+    this.recaptcha = undefined;
+    grecaptcha.render(
+     'recaptcha', {
+      sitekey : '6LcCLQoUAAAAAOYjZ0g0JeWshSFbjKZgGoQS6FOT',
+      theme : 'light',
+      callback: function (key: string) {
+        this_.recaptcha = key;
+      },
+      'expired-callback': function() {
+        this_.recaptcha = undefined;
+      }
+    });
+  }
   newSubmission(){
-
     this.model = new MediaData(this.model.ngoCode);
     this.active = false;
     setTimeout(()=> this.active=true, 0);
     this.submitted=false;
+
+    var this_ = this;
+    setTimeout(()=> this_.createRecaptcha(), 500);
+
   }
-  resetMediaSubmission(){
+  resetMediaSubmission() {
     this.model = new MediaData();
     this.active = false;
     setTimeout(()=> this.active=true, 0);
     this.submitted=false;
+
+    var this_ = this;
+    setTimeout(()=> this_.createRecaptcha(), 500);
   }
 }

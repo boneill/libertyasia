@@ -242,14 +242,21 @@
       <div class="fr_grid">
         <div class="fr_text_block">
           <div class="fr-text">
-            <p>* Mandatory fields</p>
+            <p style='margin-top:-25px;'>* Mandatory fields</p>
           </div>
         </div>
+
+        <div  >
+            <div id="recaptcha"></div>
+        </div>
+
+
         <!--<button type="submit" class="btn fr_button_fill_grey fr_button9" [disabled]="!mediaForm.form.valid">-->
         <button type="submit" class="btn fr_button_fill_grey fr_button9" [disabled]="!mediaForm.form.valid" (click) ="scrollTop()">
           <div class="fr-text">Submit</div>
         </button>
         <!--<button type="button" class="btn btn-default fr_button_fill_grey fr_button9" (click)="resetMediaSubmission()">-->
+
         <button type="button" class="btn fr_button_fill_grey fr_button9" (click)="resetMediaSubmission()">
           <div class="fr-text">Reset Form</div>
         </button>
