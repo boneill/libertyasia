@@ -56,11 +56,11 @@ export class MediaFormComponent  {
     for (let ngoCode of this.ngoCodes ) {
       if (this.model.ngoCode != null) {
         if (ngoCode.code == this.model.ngoCode) {
-          console.log("NGO Code valid: " + ngoCode.code);
+          console.log("NGO Code valid");
           this.validNGOCode = true;
           break;
         } else {
-          console.log("NGO Code inValid: " + ngoCode.code);
+          console.log("NGO Code inValid");
           this.validNGOCode = false;
         }
       }
@@ -69,25 +69,30 @@ export class MediaFormComponent  {
   }
 
   submitComplete(){
-
+    console.log("Entered submitComplete Method");
     if(this.submitData.success != null)
     {
       this.submissionResponse = this.submitData.success;
-      console.log(this.submitData.success);
+      console.log("Submission success: " + this.submitData.success);
     }
     else
     {
       this.submissionResponse = this.submitData.error;
-      console.log(this.submitData.error);
+      console.log("Submission error: " + this.submitData.error);
       //console.log(this.errorMessage)
     }
+    if(this.errorMessage != null){
+      console.log("ErrorMessage: "+this.errorMessage);
+    }
     this.submitted = true;
+    console.log("Exited submitComplete Method");
   };
 
   onSubmit() {
+    console.log("Entered onSubmit Method");
     if (this.recaptcha) {
       this.model.recaptcha = this.recaptcha;
-
+      console.log("Calling libertyAsiaService.postSubmit ");
       this.libertyAsiaService.postSubmit(this.model)
         .subscribe(
           //data => this.submitData = JSON.stringify(data),
@@ -96,11 +101,13 @@ export class MediaFormComponent  {
           () => this.submitComplete()
         );
     } else {
+      console.log("Going to Recaptcha div");
       var element = document.getElementById('recaptcha')
       var top = element.offsetTop;
       element.style.border = "solid red 1px";
       window.scrollTo(0, top);
     }
+    console.log("Exiting onSubmit Method");
   }
 
 
@@ -143,7 +150,8 @@ export class MediaFormComponent  {
     this.recaptcha = undefined;
     grecaptcha.render(
      'recaptcha', {
-      sitekey : '6LcCLQoUAAAAAOYjZ0g0JeWshSFbjKZgGoQS6FOT',
+      sitekey : '6LeFLAoUAAAAAE5lHUhyQvdvCZNBqLy06iHSnKIZ',
+      //sitekey:'6LcCLQoUAAAAAOYjZ0g0JeWshSFbjKZgGoQS6FOT',
       theme : 'light',
       callback: function (key: string) {
         this_.recaptcha = key;

@@ -13,12 +13,12 @@ import {MediaData} from "../media-data";
 @Injectable()
 export class LibertyAsiaService{
 
-    //submitURL:string = "http://192.168.56.102:8080/alfresco/service/seeksystem/mediamonitoring/createnode";
+    //submitURL:string = "http://www.seeksystem.org:8080/alfresco/service/seeksystem/mediamonitoring/createnode";
     submitURL:string = "https://www.seeksystem.org/alfresco/service/seeksystem/mediamonitoring/createnode";
-    //getNgoCodeURL:string = "http://192.168.56.102:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes";
+    //getNgoCodeURL:string = "http://www.seeksystem.org:8080/alfresco/service/seeksystem/mediamonitoring/ngocodes";
     getNgoCodeURL:string = "https://www.seeksystem.org/alfresco/service/seeksystem/mediamonitoring/ngocodes";
-    countriesUrl:string = "/app/countries.json";
-    //countriesUrl:string = "/media/app/countries.json";
+    //countriesUrl:string = "/app/countries.json";
+    countriesUrl:string = "/media/app/countries.json";
     alfTicket:string;
 
     constructor (private http: Http) {}
